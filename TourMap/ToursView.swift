@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct ToursView: View {
     var body: some View {
