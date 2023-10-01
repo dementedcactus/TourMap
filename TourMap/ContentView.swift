@@ -9,30 +9,34 @@ import SwiftUI
 import MapKit
 
 struct ContentView: View {
-    let culxrHouse = CLLocationCoordinate2D(latitude: 41.28673437517158, longitude: -95.94704840926867)
-    let greatPlainsBlackHistoryMuseum = CLLocationCoordinate2D(latitude: 41.27968147294707, longitude: -95.9463017227632)
-    let sparkcdigeocode = CLLocationCoordinate2D(latitude: 41.272385436064326, longitude: -95.9323270281948)
-    
     @State var camera: MapCameraPosition = .automatic
+    let tour = Tour()
     
     var body: some View {
         Map(position: $camera) {
+        // TODO: Change to ForEach
+            Marker("Spark CDI",
+                   systemImage: "building",
+                   coordinate: tour.sparkcdigeocode)
             
-            Marker("Spark CDI", systemImage: "building", coordinate: sparkcdigeocode)
+            Marker("Great Plains Black History Museum",
+                   systemImage: "building.columns",
+                   coordinate: tour.greatPlainsBlackHistoryMuseum)
             
-            Marker("Great Plains Black History Museum", systemImage: "building.columns",coordinate: greatPlainsBlackHistoryMuseum)
-            
-            Marker("culxr House", systemImage: "building",coordinate: culxrHouse)
+            Marker("culxr House",
+                   systemImage: "building",
+                   coordinate: tour.culxrHouse)
         }
         .mapStyle(.imagery)
         .safeAreaInset(edge: .bottom) {
+            // TODO: Change to a List
             VStack(spacing: 4) {
                 HStack(spacing: 20) {
+                    // TODO: Change to ForEach
                     Button {
-                        // Center on SparkCDI
                         camera = .region(
                             MKCoordinateRegion(
-                                center: sparkcdigeocode,
+                                center: tour.sparkcdigeocode,
                                 latitudinalMeters: 200,
                                 longitudinalMeters: 200))
                     } label: {
@@ -40,10 +44,9 @@ struct ContentView: View {
                     }
                     
                     Button {
-                        // Center on culxrHouse
                         camera = .region(
                             MKCoordinateRegion(
-                                center: culxrHouse,
+                                center: tour.culxrHouse,
                                 latitudinalMeters: 200,
                                 longitudinalMeters: 200))
                     } label: {
@@ -51,10 +54,9 @@ struct ContentView: View {
                     }
                     
                     Button {
-                        // Center on Great Plains Black History Museum
                         camera = .region(
                             MKCoordinateRegion(
-                                center: greatPlainsBlackHistoryMuseum,
+                                center: tour.greatPlainsBlackHistoryMuseum,
                                 latitudinalMeters: 200,
                                 longitudinalMeters: 200))
                     } label: {
@@ -65,7 +67,7 @@ struct ContentView: View {
                         // Reset
                         camera = .automatic
                     } label: {
-                        Text("Undo Icon")
+                        Text("TODO: Undo Icon")
                     }
                     .tint(.red)
                 }
