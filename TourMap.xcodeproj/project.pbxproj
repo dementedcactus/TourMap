@@ -12,6 +12,8 @@
 		DB03B6542AC514E30008A580 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB03B6532AC514E30008A580 /* Assets.xcassets */; };
 		DB03B6572AC514E30008A580 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB03B6562AC514E30008A580 /* Preview Assets.xcassets */; };
 		DB62AE362ACB1C830014217C /* LocationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB62AE352ACB1C830014217C /* LocationsListView.swift */; };
+		DB62AE3D2ACB2EEB0014217C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB62AE3C2ACB2EEB0014217C /* ContentView.swift */; };
+		DB62AE3F2ACB347B0014217C /* LocationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB62AE3E2ACB347B0014217C /* LocationDetailsView.swift */; };
 		DBCFCA8D2AC918AC0075578B /* Tour.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCA8C2AC918AC0075578B /* Tour.swift */; };
 /* End PBXBuildFile section */
 
@@ -22,6 +24,8 @@
 		DB03B6532AC514E30008A580 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB03B6562AC514E30008A580 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DB62AE352ACB1C830014217C /* LocationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsListView.swift; sourceTree = "<group>"; };
+		DB62AE3C2ACB2EEB0014217C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		DB62AE3E2ACB347B0014217C /* LocationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailsView.swift; sourceTree = "<group>"; };
 		DBCFCA8C2AC918AC0075578B /* Tour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tour.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -55,6 +59,8 @@
 		DB03B64E2AC514E10008A580 /* TourMap */ = {
 			isa = PBXGroup;
 			children = (
+				DB62AE3C2ACB2EEB0014217C /* ContentView.swift */,
+				DB62AE3E2ACB347B0014217C /* LocationDetailsView.swift */,
 				DB62AE3B2ACB2D010014217C /* Old Busted */,
 				DB03B6532AC514E30008A580 /* Assets.xcassets */,
 				DB03B6552AC514E30008A580 /* Preview Content */,
@@ -152,8 +158,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB62AE362ACB1C830014217C /* LocationsListView.swift in Sources */,
+				DB62AE3D2ACB2EEB0014217C /* ContentView.swift in Sources */,
 				DB03B6522AC514E10008A580 /* MapTOurVIew.swift in Sources */,
 				DB03B6502AC514E10008A580 /* TourMapApp.swift in Sources */,
+				DB62AE3F2ACB347B0014217C /* LocationDetailsView.swift in Sources */,
 				DBCFCA8D2AC918AC0075578B /* Tour.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
