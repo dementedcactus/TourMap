@@ -10,6 +10,7 @@ import MapKit
 
 struct ContentView: View {
     @State var camera: MapCameraPosition = .automatic
+    @State var isShowingLocationsList = false
     
     var body: some View {
         Map(position: $camera) {
@@ -21,47 +22,28 @@ struct ContentView: View {
             }
         }
         .mapStyle(.imagery)
+        .sheet(isPresented: $isShowingLocationsList) {
+            LocationsListView(camera: $camera) // Present a modal list view with camera binding
+        }
         .safeAreaInset(edge: .bottom) {
-            // TODO: Change to a Modal that slides up from the bottom
+            // TODO: Change to LocationsListView
             VStack(spacing: 4) {
                 HStack(spacing: 20) {
-                    // TODO: Change to ForEach
-                    Button {
-                        camera = .region(
-                            MKCoordinateRegion(
-                                center: Tour.sparkcdigeocode,
-                                latitudinalMeters: 200,
-                                longitudinalMeters: 200))
-                    } label: {
-                        Text("Spark CDI")
+                    Button(action: {
+                        isShowingLocationsList.toggle()
+                    }) {
+                        Image(systemName: "list.bullet") // Use a list icon to open the locations list
+                            .font(.title)
+                            .foregroundColor(Color.blue)
                     }
-                    
-                    Button {
-                        camera = .region(
-                            MKCoordinateRegion(
-                                center: Tour.culxrHouse,
-                                latitudinalMeters: 200,
-                                longitudinalMeters: 200))
-                    } label: {
-                        Text("culxr House")
-                    }
-                    
-                    Button {
-                        camera = .region(
-                            MKCoordinateRegion(
-                                center: Tour.greatPlainsBlackHistoryMuseum,
-                                latitudinalMeters: 200,
-                                longitudinalMeters: 200))
-                    } label: {
-                        Text("Great Plains Black History Museum")
-                    }
+                    .tint(.green)
                     
                     Button { // Reset Map
                         camera = .automatic
                     } label: {
                         Image(systemName: "arrow.uturn.backward.circle")
-                                .font(.title)
-                                .foregroundColor(.red)
+                            .font(.title)
+                            .foregroundColor(.red)
                     }
                     .tint(.red)
                 }
