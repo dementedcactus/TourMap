@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DB03B6502AC514E10008A580 /* TourMapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB03B64F2AC514E10008A580 /* TourMapApp.swift */; };
-		DB03B6522AC514E10008A580 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB03B6512AC514E10008A580 /* ContentView.swift */; };
+		DB03B6522AC514E10008A580 /* MapTOurVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB03B6512AC514E10008A580 /* MapTOurVIew.swift */; };
 		DB03B6542AC514E30008A580 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB03B6532AC514E30008A580 /* Assets.xcassets */; };
 		DB03B6572AC514E30008A580 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB03B6562AC514E30008A580 /* Preview Assets.xcassets */; };
 		DB03B65E2AC5157B0008A580 /* ToursView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB03B65D2AC5157B0008A580 /* ToursView.swift */; };
@@ -19,7 +19,7 @@
 /* Begin PBXFileReference section */
 		DB03B64C2AC514E10008A580 /* TourMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TourMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB03B64F2AC514E10008A580 /* TourMapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourMapApp.swift; sourceTree = "<group>"; };
-		DB03B6512AC514E10008A580 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		DB03B6512AC514E10008A580 /* MapTOurVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTOurVIew.swift; sourceTree = "<group>"; };
 		DB03B6532AC514E30008A580 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB03B6562AC514E30008A580 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DB03B65D2AC5157B0008A580 /* ToursView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToursView.swift; sourceTree = "<group>"; };
@@ -58,7 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				DB03B64F2AC514E10008A580 /* TourMapApp.swift */,
-				DB03B6512AC514E10008A580 /* ContentView.swift */,
+				DB03B6512AC514E10008A580 /* MapTOurVIew.swift */,
 				DB03B65D2AC5157B0008A580 /* ToursView.swift */,
 				DB62AE352ACB1C830014217C /* LocationsListView.swift */,
 				DBCFCA8C2AC918AC0075578B /* Tour.swift */,
@@ -147,7 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB62AE362ACB1C830014217C /* LocationsListView.swift in Sources */,
-				DB03B6522AC514E10008A580 /* ContentView.swift in Sources */,
+				DB03B6522AC514E10008A580 /* MapTOurVIew.swift in Sources */,
 				DB03B6502AC514E10008A580 /* TourMapApp.swift in Sources */,
 				DB03B65E2AC5157B0008A580 /* ToursView.swift in Sources */,
 				DBCFCA8D2AC918AC0075578B /* Tour.swift in Sources */,

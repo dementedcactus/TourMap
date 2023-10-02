@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MapTOurVIew.swift
 //  TourMap
 //
 //  Created by Richard Crichlow on 9/27/23.
@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-struct ContentView: View {
+struct MapTOurVIew: View {
     @State var camera: MapCameraPosition = .automatic
     @State var isShowingLocationsList = false
     
@@ -56,5 +56,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    MapTOurVIew()
 }
