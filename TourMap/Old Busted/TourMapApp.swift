@@ -11,8 +11,7 @@ import SwiftUI
 struct TourMapApp: App {
     var body: some Scene {
         WindowGroup {
-            //ContentView()
-            ToursView()
+            MapTOurVIew()
         }
     }
 }
