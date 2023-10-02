@@ -10,33 +10,26 @@ import MapKit
 
 struct ContentView: View {
     @State var camera: MapCameraPosition = .automatic
-    let tour = Tour()
     
     var body: some View {
         Map(position: $camera) {
-        // TODO: Change to ForEach
-            Marker("Spark CDI",
-                   systemImage: "building",
-                   coordinate: tour.sparkcdigeocode)
             
-            Marker("Great Plains Black History Museum",
-                   systemImage: "building.columns",
-                   coordinate: tour.greatPlainsBlackHistoryMuseum)
-            
-            Marker("culxr House",
-                   systemImage: "building",
-                   coordinate: tour.culxrHouse)
+            ForEach(Tour.allLocations) { location in
+                Marker(location.name,
+                       systemImage: "building",
+                       coordinate: location.coordinate)
+            }
         }
         .mapStyle(.imagery)
         .safeAreaInset(edge: .bottom) {
-            // TODO: Change to a List
+            // TODO: Change to a Modal that slides up from the bottom
             VStack(spacing: 4) {
                 HStack(spacing: 20) {
                     // TODO: Change to ForEach
                     Button {
                         camera = .region(
                             MKCoordinateRegion(
-                                center: tour.sparkcdigeocode,
+                                center: Tour.sparkcdigeocode,
                                 latitudinalMeters: 200,
                                 longitudinalMeters: 200))
                     } label: {
@@ -46,7 +39,7 @@ struct ContentView: View {
                     Button {
                         camera = .region(
                             MKCoordinateRegion(
-                                center: tour.culxrHouse,
+                                center: Tour.culxrHouse,
                                 latitudinalMeters: 200,
                                 longitudinalMeters: 200))
                     } label: {
@@ -56,18 +49,19 @@ struct ContentView: View {
                     Button {
                         camera = .region(
                             MKCoordinateRegion(
-                                center: tour.greatPlainsBlackHistoryMuseum,
+                                center: Tour.greatPlainsBlackHistoryMuseum,
                                 latitudinalMeters: 200,
                                 longitudinalMeters: 200))
                     } label: {
                         Text("Great Plains Black History Museum")
                     }
                     
-                    Button {
-                        // Reset
+                    Button { // Reset Map
                         camera = .automatic
                     } label: {
-                        Text("TODO: Undo Icon")
+                        Image(systemName: "arrow.uturn.backward.circle")
+                                .font(.title)
+                                .foregroundColor(.red)
                     }
                     .tint(.red)
                 }
