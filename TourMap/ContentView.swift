@@ -14,6 +14,7 @@ struct ContentView: View {
     @State private var results = [MKMapItem]()
     @State private var mapSelection: MKMapItem?
     @State private var showDetails = false
+    @State private var getDirections = false
     
     var body: some View {
         Map(position: $cameraPosition, selection: $mapSelection) {
@@ -67,7 +68,9 @@ struct ContentView: View {
             showDetails = newValue != nil
         })
         .sheet(isPresented: $showDetails, content: {
-            LocationDetailsView(mapSelection: $mapSelection, show: $showDetails)
+            LocationDetailsView(mapSelection: $mapSelection,
+                                show: $showDetails,
+                                getDirections: $getDirections)
                 .presentationDetents([.height(340)])
                 .presentationBackgroundInteraction(.enabled(upThrough: .height(340)))
                 .presentationCornerRadius(12)
