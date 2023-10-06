@@ -15,6 +15,9 @@ struct ContentView: View {
     @State private var mapSelection: MKMapItem?
     @State private var showDetails = false
     @State private var getDirections = false
+    @State private var routeDisplaying = false
+    @State private var route: MKRoute?
+    @State private var routeDestination: MKMapItem?
     
     var body: some View {
         Map(position: $cameraPosition, selection: $mapSelection) {
@@ -36,20 +39,32 @@ struct ContentView: View {
             }
             
             // Prioritized Locations To Always Show Go Here
-            Marker("Spark CDI",
-                   systemImage: "building",
-                   coordinate: Tour.sparkcdigeocode)
-            Marker("Great Plains Black History Museum",
-                   systemImage: "building.columns",
-                   coordinate: Tour.greatPlainsBlackHistoryMuseum)
-            Marker("culxr House",
-                   systemImage: "building",
-                   coordinate: Tour.culxrHouse)
+//            Marker("Spark CDI",
+//                   systemImage: "building",
+//                   coordinate: Tour.sparkcdigeocode)
+//            Marker("Great Plains Black History Museum",
+//                   systemImage: "building.columns",
+//                   coordinate: Tour.greatPlainsBlackHistoryMuseum)
+//            Marker("culxr House",
+//                   systemImage: "building",
+//                   coordinate: Tour.culxrHouse)
             
             // Search Results
             ForEach(results, id: \.self) { item in
-                let placemark = item.placemark
-                Marker(placemark.name ?? "", coordinate: placemark.coordinate)
+                if routeDisplaying {
+                    if item == routeDestination {
+                        let placemark = item.placemark
+                        Marker(placemark.name ?? "", coordinate: placemark.coordinate)
+                    }
+                } else {
+                    let placemark = item.placemark
+                    Marker(placemark.name ?? "", coordinate: placemark.coordinate)
+                }
+            }
+            
+            if let route {
+                MapPolyline(route.polyline)
+                    .stroke(.blue, lineWidth: 6)
             }
         }
         .overlay(alignment: .top) {
@@ -64,6 +79,11 @@ struct ContentView: View {
             print("Search for locations with query \(searchText)")
             Task { await searchPlaces() }
         }
+        .onChange(of: getDirections, { oldValue, newValue in
+            if newValue {
+                fetchRoute()
+            }
+        })
         .onChange(of: mapSelection, { oldValue, newValue in
             showDetails = newValue != nil
         })
@@ -91,6 +111,29 @@ extension ContentView {
         
         let results = try? await MKLocalSearch(request: request).start()
         self.results = results?.mapItems ?? []
+    }
+    
+    func fetchRoute() {
+        if let mapSelection {
+            let request = MKDirections.Request()
+            request.source = MKMapItem(placemark: .init(coordinate: .userLocation))
+            request.destination = mapSelection
+            
+            Task {
+                let result = try? await MKDirections(request: request).calculate()
+                route = result?.routes.first
+                routeDestination = mapSelection
+                
+                withAnimation(.snappy) {
+                    routeDisplaying = true
+                    showDetails = false
+                    
+                    if let rect = route?.polyline.boundingMapRect, routeDisplaying {
+                        cameraPosition = .rect(rect)
+                    }
+                }
+            }
+        }
     }
 }
 
