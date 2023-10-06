@@ -14,10 +14,10 @@ struct ContentView: View {
     @State private var results = [MKMapItem]()
     @State private var mapSelection: MKMapItem?
     @State private var showDetails = false
-        
+    
     var body: some View {
         Map(position: $cameraPosition, selection: $mapSelection) {
-            
+
             Annotation("My location", coordinate: .userLocation) {
                 ZStack {
                     Circle()
@@ -34,6 +34,18 @@ struct ContentView: View {
                 }
             }
             
+            // Prioritized Locations To Always Show Go Here
+            Marker("Spark CDI",
+                   systemImage: "building",
+                   coordinate: Tour.sparkcdigeocode)
+            Marker("Great Plains Black History Museum",
+                   systemImage: "building.columns",
+                   coordinate: Tour.greatPlainsBlackHistoryMuseum)
+            Marker("culxr House",
+                   systemImage: "building",
+                   coordinate: Tour.culxrHouse)
+            
+            // Search Results
             ForEach(results, id: \.self) { item in
                 let placemark = item.placemark
                 Marker(placemark.name ?? "", coordinate: placemark.coordinate)
@@ -41,11 +53,11 @@ struct ContentView: View {
         }
         .overlay(alignment: .top) {
             TextField("Search for a location", text: $searchText)
-            .font(.subheadline)
-            .padding(12)
-            .background(.white)
-            .padding()
-            .shadow(radius: 10)
+                .font(.subheadline)
+                .padding(12)
+                .background(.white)
+                .padding()
+                .shadow(radius: 10)
         }
         .onSubmit(of: .text) {
             print("Search for locations with query \(searchText)")

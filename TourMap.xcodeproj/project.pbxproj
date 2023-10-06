@@ -59,6 +59,7 @@
 		DB03B64E2AC514E10008A580 /* TourMap */ = {
 			isa = PBXGroup;
 			children = (
+				DB03B64F2AC514E10008A580 /* TourMapApp.swift */,
 				DB62AE3C2ACB2EEB0014217C /* ContentView.swift */,
 				DB62AE3E2ACB347B0014217C /* LocationDetailsView.swift */,
 				DB62AE3B2ACB2D010014217C /* Old Busted */,
@@ -80,7 +81,6 @@
 			isa = PBXGroup;
 			children = (
 				DB62AE352ACB1C830014217C /* LocationsListView.swift */,
-				DB03B64F2AC514E10008A580 /* TourMapApp.swift */,
 				DB03B6512AC514E10008A580 /* MapTOurVIew.swift */,
 				DBCFCA8C2AC918AC0075578B /* Tour.swift */,
 			);
