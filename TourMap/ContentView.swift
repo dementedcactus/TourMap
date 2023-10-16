@@ -18,6 +18,8 @@ struct ContentView: View {
     @State private var routeDisplaying = false
     @State private var route: MKRoute?
     @State private var routeDestination: MKMapItem?
+    @State private var showPrioritizedLocations = false
+
     
     var body: some View {
         Map(position: $cameraPosition, selection: $mapSelection) {
@@ -39,16 +41,12 @@ struct ContentView: View {
             }
             
             // Prioritized Locations To Always Show Go Here
-            //            Marker("Spark CDI",
-            //                   systemImage: "building",
-            //                   coordinate: Tour.sparkcdigeocode)
-            //            Marker("Great Plains Black History Museum",
-            //                   systemImage: "building.columns",
-            //                   coordinate: Tour.greatPlainsBlackHistoryMuseum)
-            //            Marker("culxr House",
-            //                   systemImage: "building",
-            //                   coordinate: Tour.culxrHouse)
-            
+            if showPrioritizedLocations {
+                Marker("Spark CDI", systemImage: "building", coordinate: Tour.sparkcdigeocode)
+                Marker("Great Plains Black History Museum", systemImage: "building.columns", coordinate: Tour.greatPlainsBlackHistoryMuseum)
+                Marker("culxr House", systemImage: "building", coordinate: Tour.culxrHouse)
+            }
+
             // Search Results
             ForEach(results, id: \.self) { item in
                 if routeDisplaying {
@@ -67,27 +65,49 @@ struct ContentView: View {
                     .stroke(.blue, lineWidth: 6)
             }
         }
-        .overlay(alignment: .top) {
-            HStack {
-                if routeDisplaying {
-                    Button(action: {
-                        clearRoute()
-                    }) {
-                        Image(systemName: "arrow.left.circle")
-                            .font(.title)
-                            .foregroundColor(.blue)
-                    }
-                    .tint(.blue)
+        .overlay(alignment: .bottom) {
+            Button(action: {
+                showPrioritizedLocations.toggle()
+                
+                if showPrioritizedLocations {
+                    cameraPosition = .region(MKCoordinateRegion(
+                        center: CLLocationCoordinate2D(latitude: 41.28673437517158, longitude: -95.94704840926867),
+                        latitudinalMeters: 10000,
+                        longitudinalMeters: 10000
+                    ))
+                } else {
+                    cameraPosition = .region(.userRegion)
                 }
-                TextField("Search for a location", text: $searchText)
-                    .font(.subheadline)
-                    .padding(12)
-                    .background(.white)
-                    .padding()
-                    .shadow(radius: 10)
+            }) {
+                Text(showPrioritizedLocations ? "Hide Prioritized Locations" : "Show Prioritized Locations")
+                    .foregroundColor(.blue)
+            }
+        }
+        .overlay(alignment: .top) {
+            VStack {
+                HStack {
+                    if routeDisplaying {
+                        Button(action: {
+                            clearRoute()
+                        }) {
+                            Image(systemName: "arrow.left.circle")
+                                .font(.title)
+                                .foregroundColor(.blue)
+                        }
+                        .tint(.blue)
+                    }
+                    
+                    TextField("Search for a location", text: $searchText)
+                        .font(.subheadline)
+                        .padding(12)
+                        .background(.white)
+                        .padding()
+                        .shadow(radius: 10)
+                    
+                }
+                .padding(.horizontal, 40)
                 
             }
-            .padding(.horizontal, 40)
         }
         .onSubmit(of: .text) {
             print("Search for locations with query \(searchText)")
