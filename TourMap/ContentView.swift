@@ -21,7 +21,7 @@ struct ContentView: View {
     
     var body: some View {
         Map(position: $cameraPosition, selection: $mapSelection) {
-
+            
             Annotation("My location", coordinate: .userLocation) {
                 ZStack {
                     Circle()
@@ -39,15 +39,15 @@ struct ContentView: View {
             }
             
             // Prioritized Locations To Always Show Go Here
-//            Marker("Spark CDI",
-//                   systemImage: "building",
-//                   coordinate: Tour.sparkcdigeocode)
-//            Marker("Great Plains Black History Museum",
-//                   systemImage: "building.columns",
-//                   coordinate: Tour.greatPlainsBlackHistoryMuseum)
-//            Marker("culxr House",
-//                   systemImage: "building",
-//                   coordinate: Tour.culxrHouse)
+            //            Marker("Spark CDI",
+            //                   systemImage: "building",
+            //                   coordinate: Tour.sparkcdigeocode)
+            //            Marker("Great Plains Black History Museum",
+            //                   systemImage: "building.columns",
+            //                   coordinate: Tour.greatPlainsBlackHistoryMuseum)
+            //            Marker("culxr House",
+            //                   systemImage: "building",
+            //                   coordinate: Tour.culxrHouse)
             
             // Search Results
             ForEach(results, id: \.self) { item in
@@ -68,12 +68,26 @@ struct ContentView: View {
             }
         }
         .overlay(alignment: .top) {
-            TextField("Search for a location", text: $searchText)
-                .font(.subheadline)
-                .padding(12)
-                .background(.white)
-                .padding()
-                .shadow(radius: 10)
+            HStack {
+                if routeDisplaying {
+                    Button(action: {
+                        clearRoute()
+                    }) {
+                        Image(systemName: "arrow.left.circle")
+                            .font(.title)
+                            .foregroundColor(.blue)
+                    }
+                    .tint(.blue)
+                }
+                TextField("Search for a location", text: $searchText)
+                    .font(.subheadline)
+                    .padding(12)
+                    .background(.white)
+                    .padding()
+                    .shadow(radius: 10)
+                
+            }
+            .padding(.horizontal, 40)
         }
         .onSubmit(of: .text) {
             print("Search for locations with query \(searchText)")
@@ -91,9 +105,9 @@ struct ContentView: View {
             LocationDetailsView(mapSelection: $mapSelection,
                                 show: $showDetails,
                                 getDirections: $getDirections)
-                .presentationDetents([.height(340)])
-                .presentationBackgroundInteraction(.enabled(upThrough: .height(340)))
-                .presentationCornerRadius(12)
+            .presentationDetents([.height(340)])
+            .presentationBackgroundInteraction(.enabled(upThrough: .height(340)))
+            .presentationCornerRadius(12)
         })
         .mapControls {
             MapCompass()
@@ -134,6 +148,13 @@ extension ContentView {
                 }
             }
         }
+    }
+    
+    func clearRoute() {
+        routeDisplaying = false
+        route = nil
+        routeDestination = nil
+        cameraPosition = .region(.userRegion)
     }
 }
 
