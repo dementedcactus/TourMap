@@ -12,7 +12,7 @@ struct TourMapApp: App {
     var body: some Scene {
         WindowGroup {
             //MapTOurVIew()
-            ContentView()
+            MapTourDirectionsView()
         }
     }
 }

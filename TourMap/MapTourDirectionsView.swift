@@ -1,6 +1,6 @@
 //
-//  ContentView.swift
-//  TourMap
+//  MapTourDirectionsView.swift
+//  MapTourDirectionsView
 //
 //  Created by Richard Crichlow on 10/2/23.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-struct ContentView: View {
+struct MapTourDirectionsView: View {
     @State private var cameraPosition: MapCameraPosition = .region(.userRegion)
     @State private var searchText = ""
     @State private var results = [MKMapItem]()
@@ -19,7 +19,7 @@ struct ContentView: View {
     @State private var route: MKRoute?
     @State private var routeDestination: MKMapItem?
     @State private var showPrioritizedLocations = false
-
+    
     
     var body: some View {
         Map(position: $cameraPosition, selection: $mapSelection) {
@@ -46,7 +46,7 @@ struct ContentView: View {
                 Marker("Great Plains Black History Museum", systemImage: "building.columns", coordinate: Tour.greatPlainsBlackHistoryMuseum)
                 Marker("culxr House", systemImage: "building", coordinate: Tour.culxrHouse)
             }
-
+            
             // Search Results
             ForEach(results, id: \.self) { item in
                 if routeDisplaying {
@@ -98,14 +98,24 @@ struct ContentView: View {
                     }
                     
                     TextField("Search for a location", text: $searchText)
-                        .font(.subheadline)
+                        .font(.headline)
                         .padding(12)
-                        .background(.white)
                         .padding()
+                        .padding(.horizontal, 24)
                         .shadow(radius: 10)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
+                        .overlay(
+                            HStack{
+                                Image(systemName: "magnifyingglass")
+                                    .foregroundColor(.gray)
+                                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                    .padding(.leading, 8)
+                            }
+                        )
                     
                 }
-                .padding(.horizontal, 40)
+                .padding(.horizontal, 60)
                 
             }
         }
@@ -137,7 +147,7 @@ struct ContentView: View {
     }
 }
 
-extension ContentView {
+extension MapTourDirectionsView {
     func searchPlaces() async {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = searchText
@@ -193,5 +203,5 @@ extension MKCoordinateRegion {
 }
 
 #Preview {
-    ContentView()
+    MapTourDirectionsView()
 }
